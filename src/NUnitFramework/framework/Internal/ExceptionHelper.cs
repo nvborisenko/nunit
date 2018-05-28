@@ -26,6 +26,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using NUnit.Compatibility;
 
 namespace NUnit.Framework.Internal
 {
@@ -181,6 +182,49 @@ namespace NUnit.Framework.Internal
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Executes a parameterless synchronous or async delegate and returns the exception it throws, if any.
+        /// </summary>
+        internal static Exception RecordException(Delegate parameterlessDelegate, string parameterName)
+        {
+            Guard.ArgumentNotNull(parameterlessDelegate, parameterName);
+
+            Guard.ArgumentValid(
+                parameterlessDelegate.GetMethodInfo().GetParameters().Length == 0,
+                $"The actual value must be a parameterless delegate but was {parameterlessDelegate.GetType().Name}.",
+                nameof(parameterName));
+
+            Guard.ArgumentNotAsyncVoid(parameterlessDelegate, parameterName);
+
+            using (new TestExecutionContext.IsolatedContext())
+            {
+                if (AsyncToSyncAdapter.IsAsyncOperation(parameterlessDelegate))
+                {
+                    try
+                    {
+                        AsyncToSyncAdapter.Await(parameterlessDelegate.DynamicInvokeWithTransparentExceptions);
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        parameterlessDelegate.DynamicInvokeWithTransparentExceptions();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -161,26 +161,22 @@ namespace NUnit.Framework.Internal.Builders
 
             Type returnType = testMethod.Method.ReturnType;
 
-#if ASYNC
             if (AsyncToSyncAdapter.IsAsyncOperation(testMethod.Method))
             {
                 if (returnType == typeof(void))
                     return MarkAsNotRunnable(testMethod, "Async test method must have non-void return type");
 
-                var returnsGenericTask = returnType.GetTypeInfo().IsGenericType &&
-                    returnType.GetGenericTypeDefinition() == typeof(System.Threading.Tasks.Task<>);
+                var voidResult = AwaitAdapter.GetResultType(returnType) == typeof(void);
 
-                if (returnsGenericTask && (parms == null || !parms.HasExpectedResult))
+                if (!voidResult && (parms == null || !parms.HasExpectedResult))
                     return MarkAsNotRunnable(testMethod,
-                        "Async test method must have non-generic Task return type when no result is expected");
+                        "Async test method must return an awaitable with a void result when no result is expected");
 
-                if (!returnsGenericTask && parms != null && parms.HasExpectedResult)
+                if (voidResult && parms != null && parms.HasExpectedResult)
                     return MarkAsNotRunnable(testMethod,
-                        "Async test method must have Task<T> return type when a result is expected");
+                        "Async test method must return an awaitable with a non-void result when a result is expected");
             }
-            else
-#endif
-            if (returnType == typeof(void))
+            else if (returnType == typeof(void))
             {
                 if (parms != null && parms.HasExpectedResult)
                     return MarkAsNotRunnable(testMethod, "Method returning void cannot have an expected result");

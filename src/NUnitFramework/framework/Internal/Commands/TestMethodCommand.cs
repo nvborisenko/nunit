@@ -76,7 +76,6 @@ namespace NUnit.Framework.Internal.Commands
 
         private object RunTestMethod(TestExecutionContext context)
         {
-#if ASYNC
             if (AsyncToSyncAdapter.IsAsyncOperation(testMethod.Method))
             {
                 try
@@ -88,7 +87,7 @@ namespace NUnit.Framework.Internal.Commands
                     throw new NUnitException("Rethrown", e);
                 }
             }
-#endif
+
             return InvokeTestMethod(context);
         }
 

@@ -446,5 +446,18 @@ namespace NUnit.Framework.Internal
                 throw null; // Rethrow’s return type would be `never` if C# could express that.
             }
         }
+
+        internal static object DynamicInvokeWithTransparentExceptions(this Delegate @delegate)
+        {
+            try
+            {
+                return @delegate.DynamicInvoke();
+            }
+            catch (TargetInvocationException ex)
+            {
+                ExceptionHelper.Rethrow(ex.InnerException);
+                throw null; // Rethrow’s return type would be `never` if C# could express that.
+            }
+        }
     }
 }
