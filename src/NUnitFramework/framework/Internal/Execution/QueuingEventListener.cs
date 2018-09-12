@@ -74,6 +74,11 @@ namespace NUnit.Framework.Internal.Execution
             Events.Enqueue(new TestOutputEvent(output));
         }
 
+        public void BroadcastMessage(BroadcastMessage message)
+        {
+            Events.Enqueue(new BroadcastMessageEvent(message));
+        }
+
         #endregion
     }
 }

@@ -513,9 +513,14 @@ namespace NUnit.Framework.Api
             _testOutputCount++;
         }
 
-#endregion
+        public void BroadcastMessage(BroadcastMessage message)
+        {
+            //_testOutputCount++;
+        }
 
-#region Helper Methods
+        #endregion
+
+        #region Helper Methods
 
         private ITest LoadMockAssembly()
         {

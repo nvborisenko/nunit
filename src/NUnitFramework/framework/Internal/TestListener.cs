@@ -50,6 +50,8 @@ namespace NUnit.Framework.Internal
         /// <param name="output">A TestOutput object containing the text to display</param>
         public void TestOutput(TestOutput output) { }
 
+        public void BroadcastMessage(BroadcastMessage message) { }
+
         /// <summary>
         /// Construct a new TestListener - private so it may not be used.
         /// </summary>

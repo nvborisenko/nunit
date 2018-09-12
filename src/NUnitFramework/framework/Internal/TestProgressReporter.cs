@@ -115,6 +115,19 @@ namespace NUnit.Framework.Internal
             }
         }
 
+
+        public void BroadcastMessage(BroadcastMessage message)
+        {
+            try
+            {
+                handler.RaiseCallbackEvent(message.ToXml());
+            }
+            catch (Exception ex)
+            {
+                log.Error("Exception processing BroadcastMessage event" + Environment.NewLine + ex.ToString());
+            }
+        }
+
         #endregion
 
         #region Helper Methods

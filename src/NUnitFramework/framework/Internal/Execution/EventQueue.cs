@@ -125,6 +125,29 @@ namespace NUnit.Framework.Internal.Execution
         }
     }
 
+    public class BroadcastMessageEvent : Event
+    {
+        private readonly BroadcastMessage _broadcastMessage;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestOutputEvent"/> class.
+        /// </summary>
+        /// <param name="broadcastMessage">The output object.</param>
+        public BroadcastMessageEvent(BroadcastMessage broadcastMessage)
+        {
+            _broadcastMessage = broadcastMessage;
+        }
+
+        /// <summary>
+        /// Calls TestOutput on the specified listener.
+        /// </summary>
+        /// <param name="listener">The listener.</param>
+        public override void Send(ITestListener listener)
+        {
+            listener.BroadcastMessage(_broadcastMessage);
+        }
+    }
+
     #endregion
 
     /// <summary>

@@ -485,6 +485,11 @@ namespace NUnitLite
             _textUI.TestOutput(output);
         }
 
+        public void BroadcastMessage(BroadcastMessage message)
+        {
+            //_textUI.TestOutput(output);
+        }
+
         #endregion
     }
 }

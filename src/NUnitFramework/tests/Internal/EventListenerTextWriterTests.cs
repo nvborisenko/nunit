@@ -349,6 +349,11 @@ namespace NUnit.Framework.Internal
                 if (DefaultListener != null)
                     DefaultListener.TestOutput(output);
             }
+
+            public void BroadcastMessage(BroadcastMessage message)
+            {
+                //_testOutputCount++;
+            }
         }
 
 #endregion
