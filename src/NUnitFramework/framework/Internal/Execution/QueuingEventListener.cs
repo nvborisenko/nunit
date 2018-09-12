@@ -74,6 +74,10 @@ namespace NUnit.Framework.Internal.Execution
             Events.Enqueue(new TestOutputEvent(output));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void BroadcastMessage(BroadcastMessage message)
         {
             Events.Enqueue(new BroadcastMessageEvent(message));

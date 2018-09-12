@@ -50,6 +50,10 @@ namespace NUnit.Framework.Internal
         /// <param name="output">A TestOutput object containing the text to display</param>
         public void TestOutput(TestOutput output) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void BroadcastMessage(BroadcastMessage message) { }
 
         /// <summary>

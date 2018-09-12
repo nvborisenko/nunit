@@ -345,6 +345,10 @@ namespace NUnit.Framework
             AddFormatter(next => val => (val is TSUPPORTED) ? formatter(val) : next(val));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public static void BroadcastMessage(string message)
         {
             TestExecutionContext.CurrentContext.Listener.BroadcastMessage(new BroadcastMessage(message, "Broadcast", TestExecutionContext.CurrentContext.CurrentTest.Id, TestExecutionContext.CurrentContext.CurrentTest.FullName));

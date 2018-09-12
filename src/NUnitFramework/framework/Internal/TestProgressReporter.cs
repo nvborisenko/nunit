@@ -115,7 +115,10 @@ namespace NUnit.Framework.Internal
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
         public void BroadcastMessage(BroadcastMessage message)
         {
             try

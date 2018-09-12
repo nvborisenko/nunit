@@ -125,6 +125,9 @@ namespace NUnit.Framework.Internal.Execution
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class BroadcastMessageEvent : Event
     {
         private readonly BroadcastMessage _broadcastMessage;
