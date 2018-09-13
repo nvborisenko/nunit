@@ -126,28 +126,28 @@ namespace NUnit.Framework.Internal.Execution
     }
 
     /// <summary>
-    /// 
+    /// TestMessageEvent holds information needed to call the SendMessage method.
     /// </summary>
-    public class BroadcastMessageEvent : Event
+    public class TestMessageEvent : Event
     {
-        private readonly TestMessage _broadcastMessage;
+        private readonly TestMessage _testMessage;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TestOutputEvent"/> class.
+        /// Initializes a new instance of the <see cref="TestMessageEvent"/> class.
         /// </summary>
-        /// <param name="broadcastMessage">The output object.</param>
-        public BroadcastMessageEvent(TestMessage broadcastMessage)
+        /// <param name="testMessage">The test message object.</param>
+        public TestMessageEvent(TestMessage testMessage)
         {
-            _broadcastMessage = broadcastMessage;
+            _testMessage = testMessage;
         }
 
         /// <summary>
-        /// Calls TestOutput on the specified listener.
+        /// Calls SenMessage on the specified listener.
         /// </summary>
         /// <param name="listener">The listener.</param>
         public override void Send(ITestListener listener)
         {
-            listener.SendMessage(_broadcastMessage);
+            listener.SendMessage(_testMessage);
         }
     }
 

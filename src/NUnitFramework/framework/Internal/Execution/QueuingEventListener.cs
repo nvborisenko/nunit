@@ -80,7 +80,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <param name="message">A TestMessage object containing the text to send</param>
         public void SendMessage(TestMessage message)
         {
-            Events.Enqueue(new BroadcastMessageEvent(message));
+            Events.Enqueue(new TestMessageEvent(message));
         }
 
         #endregion
