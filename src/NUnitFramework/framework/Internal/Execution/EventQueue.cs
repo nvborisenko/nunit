@@ -130,13 +130,13 @@ namespace NUnit.Framework.Internal.Execution
     /// </summary>
     public class BroadcastMessageEvent : Event
     {
-        private readonly BroadcastMessage _broadcastMessage;
+        private readonly TestMessage _broadcastMessage;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TestOutputEvent"/> class.
         /// </summary>
         /// <param name="broadcastMessage">The output object.</param>
-        public BroadcastMessageEvent(BroadcastMessage broadcastMessage)
+        public BroadcastMessageEvent(TestMessage broadcastMessage)
         {
             _broadcastMessage = broadcastMessage;
         }
@@ -147,7 +147,7 @@ namespace NUnit.Framework.Internal.Execution
         /// <param name="listener">The listener.</param>
         public override void Send(ITestListener listener)
         {
-            listener.BroadcastMessage(_broadcastMessage);
+            listener.SendMessage(_broadcastMessage);
         }
     }
 

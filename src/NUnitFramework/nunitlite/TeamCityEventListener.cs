@@ -104,7 +104,11 @@ namespace NUnitLite
         /// <param name="output">A TestOutput object containing the text to display</param>
         public void TestOutput(TestOutput output) { }
 
-        public void BroadcastMessage(BroadcastMessage message) { }
+        /// <summary>
+        /// Called when a test produces message to be sent to listeners
+        /// </summary>
+        /// <param name="message">A TestMessage object containing the text to send</param>
+        public void SendMessage(TestMessage message) { }
 
         #region Helper Methods
 

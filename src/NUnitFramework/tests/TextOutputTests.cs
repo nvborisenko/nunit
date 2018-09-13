@@ -167,7 +167,7 @@ namespace NUnit.Framework
             _testOutput = output;
         }
 
-        public void BroadcastMessage(BroadcastMessage message)
+        public void SendMessage(TestMessage message)
         {
             
         }

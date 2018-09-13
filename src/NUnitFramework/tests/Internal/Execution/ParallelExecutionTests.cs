@@ -464,7 +464,7 @@ namespace NUnit.Framework.Internal.Execution
 
         }
 
-        public void BroadcastMessage(BroadcastMessage message)
+        public void SendMessage(TestMessage message)
         {
             
         }

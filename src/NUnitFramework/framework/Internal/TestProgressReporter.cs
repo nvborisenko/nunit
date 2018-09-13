@@ -116,10 +116,10 @@ namespace NUnit.Framework.Internal
         }
 
         /// <summary>
-        /// 
+        /// Called when a test produces message to be sent to listeners
         /// </summary>
-        /// <param name="message"></param>
-        public void BroadcastMessage(BroadcastMessage message)
+        /// <param name="message">A TestMessage object containing the text to send</param>
+        public void SendMessage(TestMessage message)
         {
             try
             {
@@ -127,7 +127,7 @@ namespace NUnit.Framework.Internal
             }
             catch (Exception ex)
             {
-                log.Error("Exception processing BroadcastMessage event" + Environment.NewLine + ex.ToString());
+                log.Error("Exception processing SendMessage event" + Environment.NewLine + ex.ToString());
             }
         }
 

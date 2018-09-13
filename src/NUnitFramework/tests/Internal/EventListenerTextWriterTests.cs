@@ -350,9 +350,9 @@ namespace NUnit.Framework.Internal
                     DefaultListener.TestOutput(output);
             }
 
-            public void BroadcastMessage(BroadcastMessage message)
+            void ITestListener.SendMessage(TestMessage message)
             {
-                //_testOutputCount++;
+                
             }
         }
 

@@ -26,25 +26,22 @@ using System;
 namespace NUnit.Framework.Interfaces
 {
     /// <summary>
-    /// The TestOutput class holds a unit of output from 
-    /// a test to a specific output stream
+    /// The TestMessage class holds a unit of message from test
     /// </summary>
-	public class BroadcastMessage
+	public class TestMessage
 	{
         /// <summary>
-        /// Construct with text, output destination type and
-        /// the name of the test that produced the output.
+        /// Construct with text, destination type and
+        /// the name of the test that produced the message.
         /// </summary>
-        /// <param name="text">Text to be output</param>
-        /// <param name="stream">Name of the stream or channel to which the text should be written</param>
-        /// <param name="testId">Id of the test that produced the output</param>
-        /// <param name="testName">FullName of test that produced the output</param>
-        public BroadcastMessage(string text, string stream, string testId, string testName)
+        /// <param name="destination">Destination of message</param>
+        /// <param name="text">Text to be sent</param>
+        /// <param name="testId">Id of the test that produced the message</param>
+        public TestMessage(string destination, string text, string testId)
         {
+            Destination = destination;
             Text = text;
-            Stream = stream;
             TestId = testId;
-            TestName = testName;
         }
 
         /// <summary>
@@ -53,7 +50,7 @@ namespace NUnit.Framework.Interfaces
         /// <returns></returns>
 		public override string ToString()
 		{
-			return Stream + ": " + Text;
+			return Destination + ": " + Text;
 		}
 
         /// <summary>
@@ -62,14 +59,9 @@ namespace NUnit.Framework.Interfaces
 		public string Text { get; }
 
         /// <summary>
-        /// Get the output type
+        /// Get the destination of the test that created the message
         /// </summary>
-		public string Stream { get; }
-
-        /// <summary>
-        /// Get the name of the test that created the output
-        /// </summary>
-        public string TestName { get; }
+        public string Destination { get; }
 
         /// <summary>
         /// Get the id of the test that created the output
@@ -77,18 +69,17 @@ namespace NUnit.Framework.Interfaces
         public string TestId { get; }
 
         /// <summary>
-        /// Convert the TestOutput object to an XML string
+        /// Convert the TestMessage object to an XML string
         /// </summary>
         public string ToXml()
         {
-            TNode tnode = new TNode("broadcast-message", Text, true);
+            TNode tnode = new TNode("test-message", Text, true);
 
-            tnode.AddAttribute("stream", Stream);
             if (TestId != null)
                 tnode.AddAttribute("testid", TestId);
 
-            if (TestName != null)
-                tnode.AddAttribute("testname", TestName);
+            if (Destination != null)
+                tnode.AddAttribute("destination", Destination);
 
             return tnode.OuterXml;
         }
